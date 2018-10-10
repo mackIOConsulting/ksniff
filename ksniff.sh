@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+cd "$(dirname "$0")"
+cd sniff
 
 POD_NAME=${KUBECTL_PLUGINS_LOCAL_FLAG_POD:-$1}
 CONTAINER_NAME=${KUBECTL_PLUGINS_LOCAL_FLAG_CONTAINER}
@@ -44,4 +46,4 @@ else
 fi
 
 echo "[+] Starting remote sniffing!"
-kubectl exec ${POD_NAME} ${CONTAINER_FLAG} ${NAMESPACE_FLAG} -- /static-tcpdump -s0 -w - ${FILTER} | wireshark -k -i -
+kubectl exec ${POD_NAME} ${CONTAINER_FLAG} ${NAMESPACE_FLAG} -- /static-tcpdump -s0 -w - ${FILTER} | sudo wireshark -k -i -
